@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imperiál Söröző — Bejelentkezés</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="scene">
+
+  <div class="brandmark">
+    <h1>Imperiál Söröző</h1>
+  </div>
+
+  <p class="tagline">Sörünk 1887 óta ugyanazzal a türelemmel készül, mint akkoriban.</p>
+
+  <form class="panel" novalidate id="loginForm">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+
+    <div class="field">
+      <label for="username">Felhasználónév vagy e-mail cím</label>
+      <div class="input-wrap">
+        <input type="text" id="username" name="username" placeholder="pl. nagy.janos@example.com" autocomplete="username" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="password">Jelszó</label>
+      <div class="input-wrap">
+        <input type="password" id="password" name="password" placeholder="Adja meg jelszavát" autocomplete="current-password" required>
+        <button type="button" class="toggle-pass" aria-label="Jelszó megjelenítése" onclick="togglePassword()">
+          <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"/>
+            <circle cx="12" cy="12" r="3.2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="row-between">
+      <label class="remember">
+        <input type="checkbox" name="remember">
+        Emlékezz rám
+      </label>
+      <a href="#" class="forgot">Elfelejtette jelszavát?</a>
+    </div>
+
+    <div class="terms-field" id="termsField">
+      <label class="remember">
+        <input type="checkbox" name="terms" id="terms" required>
+        Elfogadom a Feltételeket
+      </label>
+    </div>
+
+    <p class="status-msg" id="statusMsg"></p>
+
+    <button type="submit" class="btn-primary" id="submitBtn" disabled>BEJELENTKEZÉS</button>
+
+    <div class="divider">vagy</div>
+
+    <p class="signup">Még nincs fiókja? <a href="#">Regisztráljon itt</a></p>
+  </form>
+
+  <p class="footnote">Imperiál Söröző · Harcos utca 11.</p>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
