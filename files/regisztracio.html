@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regisztráció</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0: #0a0908;
+      --bg-1: #16130f;
+      --panel: #1a1712;
+      --gold: #c6a15e;
+      --gold-bright: #e6c586;
+      --gold-dim: rgba(198,161,94,0.35);
+      --cream: #f2ecdf;
+      --muted: #8f8879;
+      --line: rgba(198,161,94,0.16);
+      --error: #d98a72;
+      --error-bg: rgba(217,138,114,0.08);
+      --error-line: rgba(217,138,114,0.32);
+      --siker: #7fae7a;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse 900px 600px at 50% -10%, #221c14 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      color: var(--cream);
+    }
+
+    .keret {
+      position: relative;
+      width: 100%;
+      max-width: 408px;
+    }
+
+    .sarok {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--gold-dim);
+      pointer-events: none;
+    }
+    .sarok.bf { top: -10px; left: -10px; border-right: none; border-bottom: none; }
+    .sarok.bj { top: -10px; right: -10px; border-left: none; border-bottom: none; }
+    .sarok.lf { bottom: -10px; left: -10px; border-right: none; border-top: none; }
+    .sarok.lj { bottom: -10px; right: -10px; border-left: none; border-top: none; }
+
+    .kartya {
+      background: var(--panel);
+      border: 1px solid rgba(198,161,94,0.14);
+      width: 100%;
+      padding: 52px 44px 44px;
+      animation: felbukkan 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes felbukkan {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .jel {
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 26px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--cream);
+      text-align: center;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    p.alcim {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .mezo { margin-bottom: 26px; position: relative; }
+
+    .mezo label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--gold);
+      margin-bottom: 9px;
+      letter-spacing: 0.01em;
+    }
+
+    .mezo input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(198,161,94,0.28);
+      border-radius: 0;
+      padding: 8px 2px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.94rem;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+
+    .mezo input:focus { border-bottom-color: var(--gold-bright); }
+    .mezo input::placeholder { color: #5c5648; }
+
+    .checkbox-sor {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin-bottom: 30px;
+      cursor: pointer;
+    }
+
+    .checkbox-sor input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      margin-top: 3px;
+      flex-shrink: 0;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .checkbox-sor span { font-size: 0.81rem; color: var(--muted); line-height: 1.55; }
+    .checkbox-sor a { color: var(--gold-bright); text-decoration: none; border-bottom: 1px solid var(--gold-dim); }
+    .checkbox-sor a:hover { border-color: var(--gold-bright); }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 100%);
+      color: #1a1712;
+      border: none;
+      border-radius: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    button:hover { filter: brightness(1.08); }
+    button:active { transform: scale(0.997); }
+
+    .also-sor {
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 28px;
+    }
+    .also-sor a { color: var(--gold-bright); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--gold-dim); }
+    .also-sor a:hover { border-color: var(--gold-bright); }
+
+    .hiba {
+      background: var(--error-bg);
+      border: 1px solid var(--error-line);
+      padding: 11px 15px;
+      font-size: 0.83rem;
+      color: var(--error);
+      margin-bottom: 22px;
+      display: none;
+    }
+
+    .siker {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      padding: 20px 0 8px;
+    }
+
+    .siker-ikon {
+      width: 54px;
+      height: 54px;
+      border: 1px solid var(--siker);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--siker);
+      font-size: 1.3rem;
+      font-family: 'Fraunces', serif;
+    }
+
+    .siker h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+    .siker p { font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="keret">
+    <span class="sarok bf"></span>
+    <span class="sarok bj"></span>
+    <span class="sarok lf"></span>
+    <span class="sarok lj"></span>
+
+    <div class="kartya">
+
+      <div class="siker" id="siker">
+        <div class="siker-ikon">✓</div>
+        <h3>Sikeres regisztráció</h3>
+        <p>Átirányítás a bejelentkezéshez…</p>
+      </div>
+
+      <div id="urlap">
+
+        <svg class="jel" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 2 L20 14 L32 17 L20 20 L17 32 L14 20 L2 17 L14 14 Z" stroke="#c6a15e" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+
+        <h1>Regisztráció</h1>
+        <p class="alcim">Hozzon létre egy új fiókot</p>
+
+        <div class="hiba" id="hiba"></div>
+
+        <div class="mezo">
+          <label for="email">E-mail cím</label>
+          <input type="email" id="email" placeholder="pelda@email.hu" />
+        </div>
+
+        <div class="mezo">
+          <label for="jelszo">Jelszó</label>
+          <input type="password" id="jelszo" placeholder="Min. 6 karakter" />
+        </div>
+
+        <div class="mezo">
+          <label for="jelszo2">Jelszó megerősítése</label>
+          <input type="password" id="jelszo2" placeholder="••••••••" />
+        </div>
+
+        <label class="checkbox-sor">
+          <input type="checkbox" id="aszf" />
+          <span>Elfogadom az <a href="#">ÁSZF</a>-et és az <a href="#">Adatvédelmi irányelveket</a>.</span>
+        </label>
+
+        <button onclick="regisztracio()">Fiók létrehozása</button>
+
+        <div class="also-sor">
+          Már van fiókja? <a href="bejelentkezes.html">← Bejelentkezés</a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function regisztracio() {
+      var email   = document.getElementById("email").value;
+      var jelszo  = document.getElementById("jelszo").value;
+      var jelszo2 = document.getElementById("jelszo2").value;
+      var aszf    = document.getElementById("aszf").checked;
+
+      if (email == "" || jelszo == "" || jelszo2 == "") {
+        megmutatHiba("Kérjük, töltse ki az összes mezőt!");
+        return;
+      }
+
+      if (email.indexOf("@") == -1) {
+        megmutatHiba("Kérjük, adjon meg érvényes e-mail címet!");
+        return;
+      }
+
+      if (jelszo.length < 6) {
+        megmutatHiba("A jelszónak legalább 6 karakter hosszúnak kell lennie!");
+        return;
+      }
+
+      if (jelszo != jelszo2) {
+        megmutatHiba("A két jelszó nem egyezik!");
+        return;
+      }
+
+      if (aszf == false) {
+        megmutatHiba("Kérjük, fogadja el a feltételeket!");
+        return;
+      }
+
+      document.getElementById("urlap").style.display = "none";
+      document.getElementById("siker").style.display = "flex";
+
+      setTimeout(function() {
+        window.location.href = "bejelentkezes.html";
+      }, 2500);
+    }
+
+    function megmutatHiba(szoveg) {
+      var hiba = document.getElementById("hiba");
+      hiba.textContent   = szoveg;
+      hiba.style.display = "block";
+    }
+  </script>
+</body>
+</html>
